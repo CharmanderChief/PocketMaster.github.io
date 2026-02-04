@@ -1,54 +1,121 @@
 <html>
 <head>
-<title>Pokémon List</title>
+<title>Pocket Master List</title>
 <style>
 body {
 font-family: Arial, sans-serif;
+background-color: #0f0f0f;
+color: #ffffff;
+margin: 0;
 padding: 20px;
-background: #f3f3f3;
 }
+
 h1 {
-margin-bottom: 20px;
+text-align: center;
+margin-bottom: 25px;
+font-size: 32px;
+color: #ffcb05; /* Pokémon yellow */
 }
+
+.search-box {
+width: 100%;
+max-width: 400px;
+margin: 0 auto 25px auto;
+display: flex;
+justify-content: center;
+}
+
+.search-box input {
+width: 100%;
+padding: 12px;
+font-size: 16px;
+border-radius: 6px;
+border: none;
+outline: none;
+background: #1e1e1e;
+color: #ffffff;
+}
+
 table {
 width: 100%;
 border-collapse: collapse;
-background: white;
+background-color: #1a1a1a;
+border-radius: 8px;
+overflow: hidden;
 }
+
 th, td {
-padding: 12px;
-border-bottom: 1px solid #ddd;
+padding: 14px;
 text-align: left;
 }
+
 th {
-background: #eee;
+background-color: #2c2c2c;
+color: #ffcb05;
+font-size: 18px;
+border-bottom: 2px solid #3c3c3c;
 }
+
+tr:nth-child(even) {
+background-color: #141414;
+}
+
 tr:hover {
-background: #f9f9f9;
+background-color: #222222;
 }
 </style>
+
+<script>
+function searchTable() {
+const input = document.getElementById("searchInput").value.toLowerCase();
+const rows = document.querySelectorAll("#pokemonTable tr");
+
+rows.forEach(row => {
+const handle = row.querySelector("td:nth-child(1)");
+const pokemon = row.querySelector("td:nth-child(2)");
+
+if (!handle || !pokemon) return;
+
+const match =
+handle.textContent.toLowerCase().includes(input) ||
+pokemon.textContent.toLowerCase().includes(input);
+
+row.style.display = match ? "" : "none";
+});
+}
+</script>
 </head>
+
 <body>
 
-<h1>Pokémon Entry List</h1>
+<h1>Pocket Master List</h1>
+
+<div class="search-box">
+<input
+type="text"
+id="searchInput"
+onkeyup="searchTable()"
+placeholder="Search Twitter handle or Pokémon..."
+>
+</div>
 
 <table>
+<thead>
 <tr>
 <th>Twitter Handle</th>
 <th>Pokémon Name</th>
 </tr>
+</thead>
 
-<!-- Example rows — delete or keep -->
+<tbody id="pokemonTable">
+<!-- Your entry -->
 <tr>
-<td>@ExampleUser</td>
-<td>Pikachu</td>
-</tr>
-<tr>
-<td>@AnotherUser</td>
-<td>Charizard</td>
+<td>@CharmanderChief</td>
+<td>Charmander 50/82</td>
 </tr>
 
 <!-- Add new entries below this line -->
+</tbody>
 </table>
 
 </body>
